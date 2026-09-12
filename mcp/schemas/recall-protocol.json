@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "anyOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocol_name": {
+          "type": "string",
+          "description": "Name of the evaluation protocol."
+        },
+        "protocol_version": {
+          "type": "string",
+          "description": "Current protocol version supplied by the server."
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "zh-CN",
+            "en"
+          ],
+          "description": "Language of the evaluation prompt."
+        },
+        "protocol_digest": {
+          "type": "string",
+          "description": "Digest binding the actual prompt and schemas, used by the Host."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Agent evaluation method, grade criteria, JSON examples, and submission requirements."
+        },
+        "input_schema": {
+          "type": "object",
+          "description": "JSON Schema for the Host-fixed observation input, not Agent tool arguments."
+        },
+        "output_schema": {
+          "type": "object",
+          "description": "JSON Schema for the Agent evaluation result and submission tool arguments."
+        }
+      },
+      "required": [
+        "protocol_name",
+        "protocol_version",
+        "language",
+        "protocol_digest",
+        "prompt",
+        "input_schema",
+        "output_schema"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[project]
+name = "meking-analysis-sidecar"
+version = "0.1.0"
+description = "Run-scoped local analysis transport for Meking"
+requires-python = "==3.12.*"
+dependencies = [
+    "fastapi==0.139.2",
+    "markitdown[docx,pdf,pptx,xlsx]==0.1.6",
+    "nltk==3.10.0",
+    "pydantic==2.13.4",
+    "python-multipart==0.0.32",
+    "textblob==0.20.0",
+    "uvicorn==0.51.0",
+]
+
+[project.scripts]
+meking-analysis-sidecar = "meking_analysis_sidecar.main:main"
+
+[dependency-groups]
+dev = [
+    "httpx==0.28.1",
+    "pytest==9.1.1",
+]
+
+[build-system]
+requires = ["hatchling==1.29.0"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

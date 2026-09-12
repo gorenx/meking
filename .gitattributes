@@ -1,0 +1,4 @@
+corpus/testdata/markitdown/*.pdf binary
+corpus/testdata/markitdown/*.docx binary
+corpus/testdata/markitdown/*.pptx binary
+corpus/testdata/markitdown/*.xlsx binary

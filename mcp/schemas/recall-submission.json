@@ -1,0 +1,90 @@
+{
+  "additionalProperties": false,
+  "description": "The LLM outputs only an evaluation result and references to existing evidence. The Host binds the result to a fixed observation before submission. Identity, version, protocol, time, and target fields are not accepted.",
+  "oneOf": [
+    {
+      "not": {
+        "required": [
+          "reason_code"
+        ]
+      },
+      "properties": {
+        "status": {
+          "const": "graded"
+        }
+      },
+      "required": [
+        "grade"
+      ]
+    },
+    {
+      "not": {
+        "required": [
+          "grade"
+        ]
+      },
+      "properties": {
+        "status": {
+          "const": "unscorable"
+        }
+      },
+      "required": [
+        "reason_code"
+      ]
+    }
+  ],
+  "properties": {
+    "evidence_refs": {
+      "description": "At least one existing evidence.ref from this observation that supports the decision. Do not cite material outside the observation or invent evidence.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "grade": {
+      "description": "Again: an actual recall attempt failed. Hard: successful recall with clear evidence of difficulty. Good: successful recall with evidence of ordinary effort. Easy: successful recall with evidence of ease. Use unscorable when recall succeeded but difficulty is unknown; do not default to Good.",
+      "enum": [
+        "Again",
+        "Hard",
+        "Good",
+        "Easy"
+      ],
+      "type": "string"
+    },
+    "rationale": {
+      "description": "Briefly state the decisive evidence for the judgment without revealing hidden reasoning, full source text, or unrelated private information.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "reason_code": {
+      "description": "The most direct reason scoring is blocked: no_recall means no actual recall; target_mismatch means the target does not match; insufficient_evidence means evidence is inadequate; answer_exposed means the answer was visible; exposure_unknown means exposure cannot be determined; difficulty_unknown means successful recall with unknown difficulty; interrupted means the expression was interrupted; evaluation_failed means no reliable judgment could be reached.",
+      "enum": [
+        "no_recall",
+        "target_mismatch",
+        "insufficient_evidence",
+        "answer_exposed",
+        "exposure_unknown",
+        "difficulty_unknown",
+        "interrupted",
+        "evaluation_failed"
+      ],
+      "type": "string"
+    },
+    "status": {
+      "description": "graded means the result can be scored and includes grade; unscorable means it cannot be scored and includes reason_code.",
+      "enum": [
+        "graded",
+        "unscorable"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "rationale",
+    "evidence_refs"
+  ],
+  "type": "object"
+}

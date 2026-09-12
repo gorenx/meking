@@ -1,0 +1,13 @@
+.git
+.cache
+workspace
+analysis-sidecar/.venv
+analysis-sidecar/.pytest_cache
+cmd/meking/internal/httpservice/frontend/node_modules
+cmd/meking/meking
+**/__pycache__
+**/*.pyc
+**/*.pyo
+*.test
+*.out
+.DS_Store

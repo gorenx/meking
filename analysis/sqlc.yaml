@@ -1,0 +1,10 @@
+version: "2"
+sql:
+  - engine: "sqlite"
+    schema: "sqlite_cache_schema.sql"
+    queries: "sqlite_cache_statements.sql"
+    gen:
+      go:
+        package: "sqlitecache"
+        out: "internal/sqlitecache"
+        emit_interface: true
